@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import requests
 import json
 import time
+from pushsafer import init, Client
 
 NUM_SECS_A_DAY = 86400
 
@@ -17,7 +18,7 @@ itemUrls = {
 
 # dict of item prices
 currPriceDict = {
-    "jacket": 70.4,
+    "cord-jacket": 70.4,
     "wrap-knit": 62.4,
     "puff-dress": 70.4,
     "dream-dress": 70.4
@@ -39,7 +40,10 @@ def check_price(url):
     
 # sends email notifying of item price decrease - INCOMPLETE
 def send_alert(item, price):
-    return 1
+    message = item + " has dropped to $" + str(price) + "!"
+    init("<private-key>")
+    Client("").send_message(message, "Price Drop!", "<device-ID>", "1", "4", "2", "https://www.pushsafer.com", "Open Pushsafer", "0", "0", "ex", "0", "0", "data:image/gif;base64,R0L...Bow==", "data:image/jpeg;base64,C4s...Cc1==", "data:image/png;base64,G0G...H5R==")
+
 
 # iterates through items and updates their prices
 # if the price of an item has decreased, it sends an alert
@@ -47,6 +51,7 @@ def check_items_prices():
     for item in itemUrls.keys():
         url = itemUrls[item]
         newPrice = check_price(url)
+        # check for price drops greater than $1
         if currPriceDict[item] - newPrice > 1.0:
             send_alert(item, newPrice)
             currPriceDict[item] = newPrice
