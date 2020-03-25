@@ -10,7 +10,7 @@ NUM_SECS_A_DAY = 86400
 
 # dict of URLs of items of interest
 itemUrls = {
-    "jacket": "https://www.princesshighway.com.au/charlie-girl-jacket-34865.html",
+    "cord-jacket": "https://www.princesshighway.com.au/charlie-girl-jacket-34865.html",
     "wrap-knit": "https://www.princesshighway.com.au/ballet-wrap-knit.html",
     "puff-dress": "https://www.princesshighway.com.au/sadie-dress.html",
     "dream-dress": "https://www.princesshighway.com.au/honey-cord-pinny.html"
